@@ -1,0 +1,169 @@
+:root {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface-2: #334155;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --accent: #22d3ee;
+  --accent-strong: #06b6d4;
+  --success: #34d399;
+  --danger: #f87171;
+  --radius: 16px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
+  padding-bottom: 4rem;
+}
+
+.app-header {
+  text-align: center;
+  padding: 1.25rem 1rem 0.5rem;
+}
+.app-header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  letter-spacing: 0.5px;
+}
+.sync-status {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.sync-status[data-state="synced"] { color: var(--success); }
+.sync-status[data-state="error"] { color: var(--danger); }
+
+main {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* VOICE CAPTURE */
+.capture { text-align: center; padding: 1.5rem 0 0.5rem; }
+.mic-btn {
+  width: 100%;
+  border: none;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #00222b;
+  padding: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8px 30px rgba(34, 211, 238, 0.25);
+}
+.mic-btn:active { transform: scale(0.98); }
+.mic-btn.listening {
+  background: linear-gradient(135deg, #f87171, #ef4444);
+  color: #2b0000;
+  animation: pulse 1.2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 8px 30px rgba(239, 68, 68, 0.4); }
+  50% { box-shadow: 0 8px 45px rgba(239, 68, 68, 0.75); }
+}
+.mic-icon { font-size: 2.2rem; }
+.heard {
+  min-height: 1.4em;
+  margin: 0.75rem 0 0;
+  font-style: italic;
+  color: var(--accent);
+}
+.hint { color: var(--muted); font-size: 0.85rem; margin-top: 0.25rem; }
+
+/* CONFIRM CARD */
+.confirm-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-top: 1rem;
+  border: 1px solid var(--surface-2);
+}
+.confirm-card h2 { margin: 0 0 1rem; font-size: 1.1rem; }
+.field { margin-bottom: 0.9rem; flex: 1; }
+.field label {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+.field input {
+  width: 100%;
+  padding: 0.85rem;
+  border-radius: 12px;
+  border: 1px solid var(--surface-2);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1.05rem;
+}
+.field input:focus { outline: 2px solid var(--accent); border-color: transparent; }
+.field-row { display: flex; gap: 0.6rem; }
+.confirm-actions { display: flex; gap: 0.6rem; margin-top: 0.5rem; }
+
+/* BUTTONS */
+.btn {
+  flex: 1;
+  padding: 0.9rem;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-primary { background: var(--accent); color: #00222b; }
+.btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--surface-2); }
+.manual-btn { width: 100%; margin-top: 0.75rem; flex: none; }
+
+/* LOG */
+.log { margin-top: 1.75rem; }
+.log-head { display: flex; align-items: center; justify-content: space-between; }
+.log h2 { font-size: 1.1rem; margin: 0 0 0.5rem; }
+.volume-badge {
+  background: var(--surface-2);
+  color: var(--accent);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.entry-list { list-style: none; margin: 0; padding: 0; }
+.entry {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.entry-main { display: flex; flex-direction: column; }
+.entry-exercise { font-weight: 700; font-size: 1.05rem; text-transform: capitalize; }
+.entry-detail { color: var(--muted); font-size: 0.9rem; }
+.entry-meta { text-align: right; }
+.entry-volume { color: var(--accent); font-weight: 700; }
+.entry-time { color: var(--muted); font-size: 0.75rem; }
+.entry-delete {
+  background: none;
+  border: none;
+  color: var(--danger);
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0 0.25rem;
+}
+.empty { color: var(--muted); font-size: 0.9rem; }
+.day-header { color: var(--muted); font-size: 0.8rem; margin: 1rem 0 0.4rem; font-weight: 700; }

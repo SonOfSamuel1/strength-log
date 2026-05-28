@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>Strength Log</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Strength Log</h1>
+    <p id="sync-status" class="sync-status" data-state="local">On this device</p>
+  </header>
+
+  <main>
+    <!-- VOICE / INPUT AREA -->
+    <section class="capture">
+      <button id="mic-btn" class="mic-btn" aria-label="Tap and speak your set">
+        <span class="mic-icon">🎤</span>
+        <span class="mic-label">Tap &amp; speak your set</span>
+      </button>
+      <p id="heard" class="heard" aria-live="polite"></p>
+      <p class="hint">Try: &ldquo;Bench press 3 sets of 10 reps at 135 pounds&rdquo;</p>
+    </section>
+
+    <!-- CONFIRM / EDIT CARD: appears after speaking, or tap "Add manually" -->
+    <section id="confirm-card" class="confirm-card" hidden>
+      <h2>Confirm your set</h2>
+      <div class="field">
+        <label for="f-exercise">Exercise</label>
+        <input id="f-exercise" type="text" placeholder="e.g. Bench press" autocomplete="off" />
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="f-sets">Sets</label>
+          <input id="f-sets" type="number" inputmode="numeric" min="0" placeholder="3" />
+        </div>
+        <div class="field">
+          <label for="f-reps">Reps</label>
+          <input id="f-reps" type="number" inputmode="numeric" min="0" placeholder="10" />
+        </div>
+        <div class="field">
+          <label for="f-weight">Weight (lbs)</label>
+          <input id="f-weight" type="number" inputmode="decimal" min="0" placeholder="135" />
+        </div>
+      </div>
+      <div class="confirm-actions">
+        <button id="cancel-btn" class="btn btn-ghost">Cancel</button>
+        <button id="save-btn" class="btn btn-primary">Save set</button>
+      </div>
+    </section>
+
+    <button id="manual-btn" class="btn btn-ghost manual-btn">+ Add manually</button>
+
+    <!-- TODAY'S LOG -->
+    <section class="log">
+      <div class="log-head">
+        <h2>Today</h2>
+        <span id="today-volume" class="volume-badge">0 lbs total</span>
+      </div>
+      <ul id="today-list" class="entry-list"></ul>
+      <p id="empty-today" class="empty">No sets logged yet today. Tap the mic to start.</p>
+    </section>
+
+    <!-- HISTORY -->
+    <section class="log">
+      <h2>History</h2>
+      <ul id="history-list" class="entry-list"></ul>
+    </section>
+  </main>
+
+  <!-- Supabase client (used by sync.js once you add your keys) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="config.js"></script>
+  <script src="parser.js"></script>
+  <script src="storage.js"></script>
+  <script src="sync.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
